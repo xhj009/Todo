@@ -1,0 +1,55 @@
+<app-menu></app-menu>
+
+<div class="container">
+  <h1 class="text-center m-5"> <img src="https://img.freepik.com/vector-gratis/empresario-sosteniendo-lapiz-gran-lista-verificacion-completa-marcas-graduacion_1150-35019.jpg?size=626&ext=jpg" alt="100px" width="100px"> Lista de tareas </h1>
+  <button class="btn btn-info mb-4" routerLink="/todo/formulario" >Crear Tarea</button>
+
+  <!--<div class="text-center d-flex m-4 "> -->
+  <div class="col-md-5 m-5 d-inline-flex">
+    <input type="search" class="form-control border rounded-pill " (input)="buscar()"  placeholder="Buscar nombre" name="nombre" [(ngModel)]="nombre" >
+    <button class="btn btn-primary border rounded-pill " (click)="buscar()"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </div>
+
+
+<table class="table table-dark  text-center ">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Completado</th>
+      <th scope="col">Fecha Creacion</th>
+      <th scope="col">Fecha Actualizacion</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let todo of todos">
+        <td>{{todo.nombre}}</td>
+
+        <td *ngIf="todo.completado; else pendiente"> <i class="fa fa-check-circle bg-success"></i> Completado</td>
+
+        <ng-template #pendiente>
+          <td> <i class="fa fa-clock bg-danger"></i> Pendiente</td>
+        </ng-template>
+
+        <td>{{todo.fechaCreacion}}</td>
+        <td>{{todo.fechaActualizacion}}</td>
+
+        <td>
+          <button class="btn btn-warning" [routerLink]="['/todo/formulario/', todo.id]" > <i class="fa-solid fa-pen-to-square"></i></button>
+          <button class="btn btn-danger m-2" (click)="delete(todo)"> <i class="fa-solid fa-trash"></i> </button>
+        </td>
+    </tr>
+
+    <tr>
+      <td><i class="fa-solid fa-angles-left fa-2x" (click)="rewind()"></i></td>
+      <td colspan="2">
+        <span *ngFor="let page of totalPages; let i = index">
+          <a style="cursor: pointer;" class="m-4" (click)="setPage(i)" [ngClass]="{'text-primary':i===page}" > {{i+1}}  </a>
+        </span>
+      </td>
+      <td><i class="fa-solid fa-angles-right fa-2x" (click)="forward()"></i></td>
+    </tr>
+
+  </tbody>
+</table>
+</div>

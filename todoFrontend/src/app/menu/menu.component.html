@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <a class="navbar-brand" href="/todo">Tareas </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+
+    <ul class="navbar-nav mr-auto">
+    </ul>
+
+
+    <form class="form-inline my-2 my-lg-0">
+    <ul *ngIf="isLogged" class="navbar-nav m-2">
+      <li class="nav-item navbar-collapse " >
+        <a class="nav-link" > <i class="fas fa-user"></i> {{nombre}} </a>
+      </li>
+    </ul>
+
+      <button *ngIf="!isLogged" class="btn btn-outline-success my-2 my-sm-0" routerLink="/login" >
+        <i class="fas fa-sign-in-alt"></i> Iniciar Sesion</button>
+        <button *ngIf="isLogged" class="btn btn-outline-danger my-2 my-sm-0" (click)="onLogOut()" >
+          <i class="fas fa-sign-in-alt"></i>
+          <i class="fas fa-door-open"></i> Cerrar Sesion</button>
+    </form>
+
+  </div>
+</nav>
